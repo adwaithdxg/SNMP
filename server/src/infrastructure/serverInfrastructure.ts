@@ -12,6 +12,7 @@ import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./swagger";
 import { ErrorHandler, HandleUnCaughtException } from "./errors";
 import { SnmpConfig } from "./config/snmp/snmp.config";
+import snmpRoutes from "../modules/snmp.routes";
 
 
 export class ServerInfrastructure {
@@ -81,6 +82,9 @@ export class ServerInfrastructure {
         this.app.get('/ping', async (req: Request, res: Response): Promise<void> => {
             res.send(' D2D CRM SERVER IS ONLINE!!!');
         });
+
+        // Register SNMP Routes
+        this.app.use("/api/snmp", snmpRoutes);
     }
 
     /**
